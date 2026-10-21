@@ -8,6 +8,7 @@ DRAG AND DROP onto FFTool.exe:
                                         models\*.obj               (95 models, editable in Blender)
                                         models\_index.txt          (model list + which ones are skin variants)
                                         textures\*.dds             (680 textures, all formats + mipmaps)
+                                        sounds\sfx\...\*.mp3       (1311 sounds: weapons, zombie voices, ...)
   nazi_zombie_prototype_unpacked   -> nazi_zombie_prototype_rebuilt.ff
   (or the .zone inside it)            If the original .ff sits next to it, the tool compares them
                                       and says IDENTICAL when nothing was changed.
@@ -23,12 +24,21 @@ REPLACING SOUNDS (.pak)
   the same format, e.g. MP3 for .mp3). Any size is fine - the table is rebuilt.
   Do not rename, add or delete files.
 
+EDITING SOUNDS (.ff)
+  sounds\sfx\weapon\...  = gun sounds,  sounds\sfx\levels\zombie\new_zombie_vox\... = zombie voices.
+  Replace any .mp3 with your own MP3 (same file name) and rebuild. It must not be
+  bigger than the original (sounds\_index.txt lists the max bytes) - export at a
+  lower bitrate (64-96 kbps) and/or mono to fit. Sample rate 48000 Hz recommended.
+  Music and battle chatter are streamed from sound0.pak, not stored in the .ff.
+
 EDITING TEXTURES (.ff)
   Open a .dds in paint.net (free), GIMP or Photoshop (with a DDS plugin), edit it and
-  save it over the same file with the SAME size and format, with mipmaps:
+  save it over the same file in the SAME format, with mipmaps. You can also change the
+  resolution (e.g. 256x256 -> 512x512) - any power-of-two size up to 4096 works:
     DXT1 -> "BC1 / DXT1",  DXT5 -> "BC3 / DXT5",  DXT3 -> "BC2 / DXT3",
     32-bit ones -> "A8R8G8B8 / uncompressed".   textures\_index.txt lists each format.
-  Drop the _unpacked folder on FFTool.exe. Wrong size/format = error, nothing written.
+  Drop the _unpacked folder on FFTool.exe. Wrong format = error, nothing written.
+  Bigger textures use more PS3 video memory - upscale a few, not everything.
   Untouched .dds files are left exactly as they were.
 
 EDITING MODELS (.ff)
